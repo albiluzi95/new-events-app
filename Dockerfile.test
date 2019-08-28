@@ -22,12 +22,8 @@ RUN npm install
 # Bundle app source
 COPY . /usr/src/app
 
-# Port to listener
-EXPOSE 3000
-
 # Environment variables
-ENV NODE_ENV production
-ENV PORT 3000
-ENV PUBLIC_PATH "/"
+ENV NODE_ENV test
 
-RUN npm run build:ssr
+# Main command
+CMD [ "npm", "test" ]
