@@ -1,45 +1,35 @@
 pipeline {
-  agent none
-  stages {
-    stage('Fetch dependencies') {
-      agent {
-        docker 'circleci/node:9.3-stretch-browsers'
-      }
-      steps {
-        sh 'npm install'
-        stash includes: 'node_modules/', name: 'node_modules'
-      }
+    agent {
+        docker {
+            image 'node:6-alpine'
+            args '-p 3000:3000'
+        }
     }
-    stage('Unit Test') {
-      agent {
-        docker 'circleci/node:9.3-stretch-browsers'
-      }
-      steps {
-        unstash 'node_modules'
-        sh 'npm run test'
-      }
+    environment { 
+        CI = 'true'
     }
-    stage('Compile') {
-      agent {
-        docker 'circleci/node:9.3-stretch-browsers'
-      }
-      steps {
-        unstash 'node_modules'
-        sh 'ng build --prod'
-        stash includes: 'dist/', name: 'dist'
-      }
+    stages {
+        stage('install') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'npm run test'
+            }
+        }
+        stage('install') {
+            steps {
+                sh 'ng build --prod'
+            }
+        }
+        stage('Deliver') { 
+            steps {
+                sh './jenkins/scripts/deliver.sh' 
+                input message: 'Finished using the web site? (Click "Proceed" to continue)' 
+                sh './jenkins/scripts/kill.sh' 
+            }
+        }
     }
-    stage('Build and Push Docker Image') {
-      agent any
-      environment {
-        DOCKER_PUSH = credentials('docker_push')
-      }
-      steps {
-        unstash 'dist'
-        sh 'docker build -t $DOCKER_PUSH_URL/frontend .'
-        sh 'docker login -u $DOCKER_PUSH_USR -p $DOCKER_PUSH_PSW $DOCKER_PUSH_URL'
-        sh 'docker push $DOCKER_PUSH_URL/frontend'
-      }
-    }
-  }
 }
