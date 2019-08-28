@@ -21,13 +21,13 @@ import { appRoutes } from './routes';
 import { Error404Component } from './errors/404.component';
 import {
     JQ_TOKEN,
-    Toastr,
-    TOASTR_TOKEN,
     CollapsibleWellComponent,
     SimpleModalComponent,
     ModalTriggerDirective
 } 
-from './commmon/Index'
+from './commmon/Index';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxSmartModalModule } from 'ngx-smart-modal'
 // import { EventRouteActivator } from './events/events-details/event-router-activator.service';
 import { AuthService } from './user/auth.services';
 import { FormsModule, ReactiveFormsModule } from 'node_modules/@angular/forms';
@@ -35,8 +35,8 @@ import  {HttpClientModule} from '@angular/common/http';
 import { EventResolver } from './events/event-resolver.service';
 import { AppComponent } from './app.component';
 
-let toastr: Toastr= window['toastr'];
-let jQuery=window['$']
+// let toastr: Toastr= window['toastr'];
+// let jQuery=window['$']
 
 @NgModule ({
     declarations: [
@@ -62,11 +62,13 @@ let jQuery=window['$']
         FormsModule,
         ReactiveFormsModule,
         RouterModule.forRoot(appRoutes),
-        HttpClientModule
+        HttpClientModule, 
+        ToastrModule.forRoot(),
+        NgxSmartModalModule.forRoot()
     ],
     providers:[EventService,
-        {provide: TOASTR_TOKEN,useValue:toastr},
-        {provide: JQ_TOKEN,useValue:jQuery},
+        // {provide: TOASTR_TOKEN,useValue:toastr},
+        //  {provide: JQ_TOKEN,useValue:jQuery},
         EventListResolver,
         AuthService,
         EventResolver,

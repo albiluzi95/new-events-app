@@ -9,14 +9,19 @@ pipeline {
         CI = 'true'
     }
     stages {
-        stage('Build') {
+        stage('install') {
             steps {
                 sh 'npm install'
             }
         }
         stage('Test') {
             steps {
-                sh 'ng test'
+                sh 'npm run test'
+            }
+        }
+        stage('install') {
+            steps {
+                sh 'npm run build:ssr'
             }
         }
         stage('Deliver') { 
