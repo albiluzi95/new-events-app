@@ -33,12 +33,14 @@ import { AuthService } from './user/auth.services';
 import { FormsModule, ReactiveFormsModule } from 'node_modules/@angular/forms';
 import  {HttpClientModule} from '@angular/common/http';
 import { EventResolver } from './events/event-resolver.service';
+import { AppComponent } from './app.component';
 
 let toastr: Toastr= window['toastr'];
 let jQuery=window['$']
 
 @NgModule ({
     declarations: [
+    AppComponent,
     EventsAppComponent,
     EventsListsComponent,
     EventsThumbnailComponent,
@@ -56,7 +58,7 @@ let jQuery=window['$']
     EventDetailsComponent,
     ],
     imports: [
-        BrowserModule,
+        BrowserModule.withServerTransition({ appId: 'serverApp' }),
         FormsModule,
         ReactiveFormsModule,
         RouterModule.forRoot(appRoutes),

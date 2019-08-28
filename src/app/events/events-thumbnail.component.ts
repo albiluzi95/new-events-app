@@ -16,7 +16,7 @@ import { IEvent } from './shared';
     </div>
     <div>price: {{event?.price | currency: 'USD'}}</div>
     <div *ngIf="event?.location">
-    <span>Location: {{event?.location?.adress}} </span>
+    <span>Location: {{event?.location?.address}} </span>
     <span class="pad-left">{{event?.location?.city}}, {{event.location.country}}</span>
     </div>
     <div *ngIf="event?.onlineUrl">
