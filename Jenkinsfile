@@ -1,7 +1,7 @@
 node {
   try {
      stage ('Setup NodeJs'){
-        env.NODE_HOME="${tool 'Node 6.x'}"
+        env.NODE_HOME="${tool 'nodejs10.x'}"
         env.PATH="${env.NODE_HOME}/bin:${env.PATH}"
         sh 'npm -version'
     }
