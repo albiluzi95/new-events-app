@@ -1,5 +1,10 @@
 node {
   try {
+     stage ('Setup NodeJs'){
+        env.NODE_HOME="${tool 'Node 6.x'}"
+        env.PATH="${env.NODE_HOME}/bin:${env.PATH}"
+        sh 'npm -version'
+    }
     stage('Checkout') {
       checkout scm
     }
