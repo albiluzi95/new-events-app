@@ -16,7 +16,7 @@ node {
       sh 'docker run --rm events-app-test'
     }
     stage('Clean Docker test'){
-      sh 'docker rm events-app-test'
+      sh 'docker rmi  events-app-test'
     }
     stage('Deploy'){
       if(env.BRANCH_NAME == 'master'){
