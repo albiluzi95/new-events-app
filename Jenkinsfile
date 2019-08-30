@@ -23,7 +23,7 @@ node {
         sh 'docker build -t events-app --no-cache .'
         sh 'docker tag events-app localhost:5000/events-app'
         sh 'docker push localhost:5000/events-app'
-        sh 'docker rm --force events-app localhost:5000/events-app'
+        sh 'docker rmi -f events-app localhost:5000/events-app'
       }
     }
   }
