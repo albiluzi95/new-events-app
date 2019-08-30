@@ -30,7 +30,7 @@ ENV NODE_ENV production
 ENV PORT 3000
 ENV PUBLIC_PATH "/"
 
-RUN npm run build
+RUN npm run build:ssr
 
 # Main command for 
-# CMD [ "npm", "run", "build" ]
+ CMD [ "npm", "run", "serve:ssr" ]

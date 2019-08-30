@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { BrowserTransferStateModule } from '@angular/platform-browser';
 
 import {EventsListsComponent,
     EventListResolver,
@@ -57,7 +58,8 @@ import { AppComponent } from './app.component';
     EventDetailsComponent,
     ],
     imports: [
-        BrowserModule.withServerTransition({ appId: 'serverApp' }),
+        BrowserModule.withServerTransition({ appId: 'events-app' }),
+        BrowserTransferStateModule,
         FormsModule,
         ReactiveFormsModule,
         RouterModule.forRoot(appRoutes),
