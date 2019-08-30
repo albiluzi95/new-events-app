@@ -1,10 +1,5 @@
 node {
   try {
-     stage ('Setup NodeJs'){
-        env.NODE_HOME="${tool 'nodejs10.x'}"
-        env.PATH="${env.NODE_HOME}/bin:${env.PATH}"
-        sh 'npm -version'
-    }
     stage('Checkout') {
       checkout scm
     }
@@ -21,14 +16,14 @@ node {
       sh 'docker run --rm events-app-test'
     }
     stage('Clean Docker test'){
-      sh 'docker rmi events-app-test'
+      sh 'docker rm events-app-test'
     }
     stage('Deploy'){
       if(env.BRANCH_NAME == 'master'){
         sh 'docker build -t events-app --no-cache .'
         sh 'docker tag events-app localhost:5000/events-app'
         sh 'docker push localhost:5000/events-app'
-        sh 'docker rmi -f events-app localhost:5000/events-app'
+        sh 'docker rm --force events-app localhost:5000/events-app'
       }
     }
   }

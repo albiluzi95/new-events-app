@@ -27,7 +27,6 @@ import {
 } 
 from './commmon/Index';
 import { ToastrModule } from 'ngx-toastr';
-import { NgxSmartModalModule } from 'ngx-smart-modal'
 // import { EventRouteActivator } from './events/events-details/event-router-activator.service';
 import { AuthService } from './user/auth.services';
 import { FormsModule, ReactiveFormsModule } from 'node_modules/@angular/forms';
@@ -64,7 +63,6 @@ import { AppComponent } from './app.component';
         RouterModule.forRoot(appRoutes),
         HttpClientModule, 
         ToastrModule.forRoot(),
-        NgxSmartModalModule.forRoot()
     ],
     providers:[EventService,
         // {provide: TOASTR_TOKEN,useValue:toastr},
