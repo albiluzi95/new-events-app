@@ -46,7 +46,7 @@ export class EventService{
     }
     private handleError<T>(operation='operation',result?: T){
       return (error:any):Observable<T> =>{
-        console.log(error)
+        alert("The services are not implemented yet")
         return of(result as T);
       }
     }
